@@ -14,5 +14,6 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-- script: terraform version
-  displayName: 'Check Terraform Version'
+- script: |
+    terraform init
+  displayName: 'Terraform Init'
