@@ -25,6 +25,15 @@ stages:
       inputs:
         terraformVersion: 'latest'
 
+    - task: AzureCLI@2
+      displayName: 'Azure Login'
+      inputs:
+        azureSubscription: 'devopstest'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az account show
+
     - script: |
         terraform init
         terraform validate
