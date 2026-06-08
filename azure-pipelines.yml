@@ -11,6 +11,5 @@ pool:
 
 steps:
 - script: |
-    echo "Terraform files found"
-    ls -la
-  displayName: "Verify Repository Files"
+    terraform version
+  displayName: "Check Terraform Version"
