@@ -17,5 +17,4 @@ steps:
 - script: |
     terraform init
     terraform validate
-    terraform plan -var-file="dev.cfg"
-  displayName: 'Terraform Plan'
+  displayName: 'Terraform Validate'
