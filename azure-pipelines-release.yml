@@ -1,0 +1,32 @@
+trigger: none
+
+pr: none
+
+resources:
+  pipelines:
+  - pipeline: build
+    source: terraform-ci
+
+stages:
+
+- stage: Plan
+  displayName: 'Terraform Plan'
+
+  jobs:
+  - job: PlanJob
+    displayName: 'Generate Terraform Plan'
+
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+
+    - script: |
+        terraform init
+        terraform validate
+        terraform plan -var-file="dev.cfg"
+      displayName: 'Terraform Plan'
