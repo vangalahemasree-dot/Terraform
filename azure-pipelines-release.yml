@@ -25,17 +25,13 @@ stages:
       inputs:
         terraformVersion: 'latest'
 
-    - task: AzureCLI@2
-      displayName: 'Azure Login'
-      inputs:
-        azureSubscription: 'devopstest'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az account show
-
-    - script: |
-        terraform init
-        terraform validate
-        terraform plan -var-file="dev.cfg"
-      displayName: 'Terraform Plan'
+- task: AzureCLI@2
+  displayName: 'Terraform Plan'
+  inputs:
+    azureSubscription: 'devopstest'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      terraform init
+      terraform validate
+      terraform plan -var-file="dev.cfg"
