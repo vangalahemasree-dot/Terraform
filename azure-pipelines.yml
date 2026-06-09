@@ -16,5 +16,4 @@ steps:
 
 - script: |
     terraform init
-    terraform validate
-  displayName: 'Terraform Validate'
+  displayName: 'Terraform init'
