@@ -35,30 +35,35 @@ stages:
           terraform init
           terraform validate
           terraform plan -var-file="dev.cfg"
-          
+
 - stage: Apply
   displayName: 'Terraform Apply'
   dependsOn: Plan
 
   jobs:
-  - job: ApplyJob
+  - deployment: ApplyDeployment
     displayName: 'Apply Terraform'
+
+    environment: Dev
 
     pool:
       vmImage: ubuntu-latest
 
-    steps:
+    strategy:
+      runOnce:
+        deploy:
+          steps:
 
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: 'latest'
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
 
-    - task: AzureCLI@2
-      displayName: 'Terraform Apply'
-      inputs:
-        azureSubscription: 'devopstest'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          terraform init
-          terraform apply -var-file="dev.cfg" -auto-approve
+          - task: AzureCLI@2
+            displayName: 'Terraform Apply'
+            inputs:
+              azureSubscription: 'devopstest'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                terraform init
+                terraform apply -var-file="dev.cfg" -auto-approve
