@@ -65,7 +65,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-              pwd
-              ls -la
-              terraform init -backend-config=./backend.conf
-              terraform apply -var-file="dev.cfg" -auto-approve
+               pwd
+               ls -la
+               terraform init -backend-config=backend.conf
+               terraform apply -var-file="dev.cfg" -auto-approve
