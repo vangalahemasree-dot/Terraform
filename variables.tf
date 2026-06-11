@@ -1,9 +1,6 @@
-variable "resource_group_name" {
-  description = "Resource Group Name"
-  type        = string
-}
-
-variable "region" {
-  description = "Azure Region"
-  type        = string
+variable "resource_groups" {
+  type = list(object({
+    name   = string
+    region = string
+  }))
 }
